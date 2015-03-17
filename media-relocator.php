@@ -184,7 +184,7 @@ function mrelocator_getdir_callback()
 			}
 		}
 	}
-	usort($dir1, mrelocator_dircmp);
+	usort($dir1, 'mrelocator_dircmp');
 	for ($i=count($dir1)-1; $i>=0; $i--) {
 		$dir1[$i]['id'] = "";
 		if ($dir1[$i]['isdir']) {
@@ -233,16 +233,18 @@ function mrelocator_getdir_callback()
 						}
 					}
 					$dir1[$i]['thumbnail'] = $min_child;
-					$dir1[$i]['thumbnail_url'] = mrelocator_path2url($dir .  $dir1[$min_child]['name']);
-					$backup_sizes = get_post_meta( $dbres[0]->post_id, '_wp_attachment_backup_sizes', true );
-					$meta = wp_get_attachment_metadata( $dbres[0]->post_id );
-					if ( is_array($backup_sizes) ) {
-						foreach ( $backup_sizes as $size ) {
-							for ($j=0; $j<count($dir1); $j++) {
-								if ($dir1[$j]['name'] == $size['file']) {
-									$dir1[$j]['parent'] = $i;
-									$dir1[$j]['isthumb'] = 1;
-									break;
+					if ( isset( $dir1[$min_child] ) ) {
+						$dir1[$i]['thumbnail_url'] = mrelocator_path2url($dir .  $dir1[$min_child]['name']);
+						$backup_sizes = get_post_meta( $dbres[0]->post_id, '_wp_attachment_backup_sizes', true );
+						$meta = wp_get_attachment_metadata( $dbres[0]->post_id );
+						if ( is_array($backup_sizes) ) {
+							foreach ( $backup_sizes as $size ) {
+								for ($j=0; $j<count($dir1); $j++) {
+									if ($dir1[$j]['name'] == $size['file']) {
+										$dir1[$j]['parent'] = $i;
+										$dir1[$j]['isthumb'] = 1;
+										break;
+									}
 								}
 							}
 						}
@@ -312,7 +314,8 @@ function mrelocator_get_subdir($dir)
 {
 	global $mrelocator_uploaddir;
 	$upload_dir = $mrelocator_uploaddir;
-	$upload_dir = substr($upload_dir, 0, strlen($upload_dir)-strlen($upload_dir_a['subdir']));
+	//$upload_dir = substr($upload_dir, 0, strlen($upload_dir)-strlen($upload_dir_a['subdir']));
+
 	$subdir = substr($dir,  strlen($upload_dir));
 	if (substr($subdir,0,1)=="/" || substr($subdir,0,1)=="\\") {
 		$subdir = substr($subdir, 1);
