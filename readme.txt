@@ -3,8 +3,8 @@ Contributors: aueda
 Donate link: http://tempspace.net/plugins/
 Tags: media,file,manager,explorer,relocate,folder,folders,files,rename,make directory,directories,organize,organizer,select,selector,database
 Requires at least: 3.6.0
-Tested up to: 3.8.1
-Stable tag: 1.2.1
+Tested up to: 4.0.0
+Stable tag: 1.3.0
 
 You can make sub-directories in the upload directory, and move files into them.
 
@@ -54,6 +54,11 @@ Install the plugin like usual ones. Then activate it.
 1. Media File Manager.
 
 == Changelog ==
+
+= 1.3.0 =
+* Added a permission setting for file selector feature.
+* Corrected background color.
+* Fixed some errors.
 
 = 1.2.1 =
 * Fixed some errors.
